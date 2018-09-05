@@ -1,0 +1,17 @@
+$sm: "(max-width: 1023px)";
+$xs: "(max-width: 767px)";
+
+.container {
+  height: 100%;
+  max-width: 1125px;
+  margin: 0 auto;
+  padding: 0 10px;
+
+  &--lg {
+    max-width: 1185px;
+  }
+
+  &--sm {
+    max-width: 915px;
+  }
+}

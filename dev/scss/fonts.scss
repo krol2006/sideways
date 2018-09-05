@@ -1,0 +1,18 @@
+@font-face {
+  src: url(../fonts/OpenSans-Regular.ttf);
+  font-family: "OpenSans";
+}
+
+@font-face {
+  src: url(../fonts/OpenSans-Light.ttf);
+  font-family: "OpenSansLight";
+}
+
+@font-face {
+  src: url(../fonts/Montserrat-Regular.ttf);
+  font-family: "Montserrat";
+}
+
+$font: "OpenSans", sans-serif;
+$fontLight: "OpenSansLight", sans-serif;
+$fontMont: "Montserrat", sans-serif;

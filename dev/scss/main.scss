@@ -1,0 +1,931 @@
+body {
+  font: 14px $font;
+  color: $black;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+.helper {
+  overflow-x: hidden;
+}
+
+.header {
+  height: 95px;
+  position: fixed;
+  background: $red;
+  border-bottom: 2px solid white;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  transition: top 0.2s linear;
+
+  @include breakpoint($xs){
+    height: 60px;
+  }
+
+  &--hidden {
+    top: -97px;
+
+    @include breakpoint($xs){
+      top: -62px;
+    }
+  }
+
+  &__layout {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    width: 113px;
+    position: relative;
+    z-index: 20;
+
+    &__image {
+      vertical-align: middle;
+    }
+  }
+
+  &__panel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    @include breakpoint($sm){
+      opacity: 0;
+      visibility: hidden;
+      position: fixed;
+      flex-direction: column;
+      justify-content: flex-start;
+      background: $red;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 10;
+      transition: visibility .2s, opacity .2s;
+    }
+
+    &--opened {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &__toggle {
+      display: none;
+      position: relative;
+      cursor: pointer;
+      background: none;
+      border: none;
+      top: -3px;
+      z-index: 20;
+
+      &:focus {
+        outline: none;
+      }
+
+      i {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 3px;
+        color: #252525;
+        background: #fff;
+        transition: all .2s ease-out;
+        pointer-events: none;
+      }
+
+      i::before, i::after {
+        content:'';
+        width: 30px;
+        height:3px;
+        background: #fff;
+        position: absolute;
+        left: 0;
+        transition:all .2s ease-out;
+      }
+
+      i::before {
+        top: -8px;
+      }
+
+      i::after {
+        bottom: -8px;
+      }
+
+      &--active i {
+        background: transparent;
+      }
+
+      &--active i::before {
+        top: 0;
+        transform: rotateZ(45deg);
+      }
+
+      &--active i::after {
+        bottom: 0;
+        transform: rotateZ(-45deg);
+      }
+
+      @include breakpoint($sm){
+        display: block;
+      }
+    }
+  }
+
+  &__menu {
+    margin-right: 30px;
+
+    @include breakpoint($sm){
+      margin-right: 0;
+      margin-top: 90px;
+    }
+
+    &__list {
+      display: flex;
+
+      @include breakpoint($sm){
+        flex-direction: column;
+      }
+    }
+
+    &__item {
+      margin-left: 50px;
+
+      @include breakpoint($sm){
+        height: 50px;
+        text-align: center;
+        margin: {
+          left: 0;
+        };
+      }
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    &__link {
+      font: 18px $fontMont;
+      color: white;
+      text-decoration: none;
+
+      @include breakpoint($sm){
+        display: block;
+        height: 100%;
+        line-height: 50px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__buttons {
+    @include breakpoint($sm){
+      margin-top: 30px;
+    }
+  }
+}
+
+.intro {
+  background: $red;
+  position: relative;
+  margin-bottom: 50px;
+  box-sizing: border-box;
+
+  @include breakpoint($sm){
+    padding-top: 130px;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    height: 50px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -50px;
+    background: url(../images/intro_bg.png) repeat-x;
+  }
+
+  &__layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakpoint($sm){
+      flex-direction: column;
+    }
+  }
+
+  &__content {
+    width: 45%;
+
+    @include breakpoint($sm){
+      width: 80%;
+      text-align: center;
+    }
+  }
+
+  &__image {
+    width: 55%;
+    min-height: 500px;
+    background: {
+      image: url("../images/intro_img.png");
+      position: right 50%;
+      repeat: no-repeat;
+    };
+    margin: 134px 0 100px;
+
+    @include breakpoint($sm){
+      width: 100%;
+      margin: {
+        top: 30px;
+        bottom: 30px;
+      };
+      background-position: center center !important;
+    }
+
+    @include breakpoint($xs){
+      min-height: 300px;
+      max-width: 320px;
+      -webkit-background-size: 100% auto;
+      background-size: 100% auto;
+    }
+  }
+
+  &__text {
+    max-width: 340px;
+    color: white;
+    font-size: 18px;
+
+    @include breakpoint($sm){
+      max-width: 100%;
+    }
+  }
+
+  &__buttons {
+    margin-top: 30px;
+  }
+}
+
+.description {
+  margin: 90px auto 120px;
+  max-width: 550px;
+  text-align: center;
+  font-size: 18px;
+  box-sizing: border-box;
+  line-height: 29px;
+
+  @include breakpoint($sm){
+    margin-bottom: 60px;
+  }
+
+  @include breakpoint($xs){
+    padding: 0 5px;
+  }
+}
+
+.features {
+  margin-bottom: 85px;
+  box-sizing: border-box;
+
+  @include breakpoint($sm){
+    margin-bottom: 60px;
+  }
+
+  @include breakpoint($xs){
+    padding: 0 5px;
+  }
+
+  &__layout {
+    text-align: center;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 130px;
+
+    @include breakpoint($sm){
+      margin-top: 30px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  &__item {
+    flex: 0 1 33%;
+    max-width: 320px;
+    position: relative;
+
+    @include breakpoint($sm){
+      margin-bottom: 40px;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      opacity: .2;
+
+      @include breakpoint($sm){
+        display: none;
+      }
+    }
+
+    &--left::before {
+      background-image: url("../images/features_arrow-left_bg.png");
+      width: 173px;
+      height: 115px;
+      right: -150px;
+      top: -80px;
+    }
+
+    &--center::before {
+      background-image: url("../images/features_arrow-center_bg.png");
+      width: 34px;
+      height: 73px;
+      right: 140px;
+      top: -90px;
+    }
+
+    &--right::before {
+      background-image: url("../images/features_arrow-right_bg.png");
+      width: 164px;
+      height: 85px;
+      top: -80px;
+      left: -110px;
+    }
+
+    &__image-container {
+      min-height: 292px;
+      margin-bottom: 35px;
+    }
+
+    &__text {
+      font-size: 18px;
+      min-height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 38px;
+    }
+  }
+}
+
+.logos {
+  margin-bottom: 60px;
+
+  @include breakpoint($xs){
+    margin-bottom: 0;
+  }
+
+  &__layout {
+    text-align: center;
+    margin: 0 65px;
+
+    @include breakpoint($sm){
+      margin: {
+        left: auto;
+        right: auto;
+      };
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 55px;
+
+    &__item {
+      flex: 0 1 25%;
+      width: 25%;
+      height: 65px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 60px;
+
+      @include breakpoint($xs){
+        flex: 0 1 50%;
+        width: 50%;
+      }
+
+      img {
+        display: block;
+        max-width: 90%;
+      }
+    }
+  }
+}
+
+.sides {
+  $sides: &;
+
+  &__item {
+    min-height: 540px;
+    display: flex;
+    justify-content: center;
+
+    @include breakpoint($sm){
+      flex-direction: column;
+    }
+
+    &--reverse {
+      flex-direction: row-reverse;
+
+      @include breakpoint($sm){
+        flex-direction: column;
+      }
+
+      #{$sides}__item__text {
+        background: transparent;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      #{$sides}__item__image {
+        background-image: url("../images/testmonials_img2.jpg");
+      }
+    }
+
+    &--fill {
+      #{$sides}__item__text {
+        background: $pink;
+      }
+    }
+
+    &__image, &__text {
+      width: 50%;
+
+      @include breakpoint($sm){
+        width: 100%;
+      }
+    }
+
+    &__image {
+      text-align: right;
+      background: url("../images/testmonials_img.jpg") no-repeat;
+      background-size: cover;
+
+      @include breakpoint($sm){
+        height: 540px;
+      }
+
+      @include breakpoint($xs){
+        height: 340px;
+      }
+
+      &__buttons {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    &__text {
+      box-sizing: border-box;
+      padding: 70px 80px;
+      font-size: 15px;
+
+      @include breakpoint($sm){
+        padding: 30px;
+        text-align: center;
+      }
+
+      &__wrap {
+        max-width: 500px;
+
+        @include breakpoint($sm){
+          max-width: 100%;
+        }
+      }
+
+      &__author {
+        display: block;
+        color: $gray;
+        font: {
+          size: 15px;
+          style: italic;
+        };
+        margin-top: 10px;
+      }
+
+      p {
+        margin-bottom: 40px;
+      }
+    }
+  }
+}
+
+.illustration {
+  box-sizing: border-box;
+  padding: 95px 0;
+
+  @include breakpoint($sm){
+    padding: 60px 0;
+  }
+
+  $illustration: &;
+
+  &--fill {
+    background: $pink;
+  }
+
+  &--reverse {
+    #{$illustration}__layout {
+      flex-direction: row-reverse;
+
+      @include breakpoint($sm){
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__title {
+    text-align: center;
+    max-width: 460px;
+    margin: {
+      left: auto;
+      right: auto;
+    };
+
+    &__hint {
+      display: block;
+      text-align: center;
+      font-size: 19px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__layout {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 62px;
+
+    @include breakpoint($sm){
+      flex-direction: column;
+    }
+  }
+
+  &__image {
+    flex-basis: 460px;
+    box-sizing: border-box;
+    padding-top: 6px;
+
+    @include breakpoint($xs){
+      flex-basis: auto;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    flex-basis: 380px;
+  }
+
+  &__text {
+    font-size: 15px;
+    box-sizing: border-box;
+
+    @include breakpoint($sm){
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    &__title {
+      color: $red;
+      margin-bottom: 40px;
+      font: 18px $fontMont;
+    }
+
+    &__content p {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__buttons {
+    margin-top: 40px;
+
+    @include breakpoint($sm){
+      text-align: center;
+    }
+  }
+}
+
+.stats {
+  height: 425px;
+  background: $red;
+
+  @include breakpoint($sm){
+    height: auto;
+  }
+
+  &__list {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include breakpoint($sm){
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+
+  &__item {
+    flex: 0 1 33%;
+    max-width: 425px;
+    position: relative;
+    border: {
+      right: 2px solid rgba(white, .25);
+      bottom: 2px solid transparent;
+    }
+    background: {
+      position: center center;
+      repeat: no-repeat;
+    };
+
+    @include breakpoint($sm){
+      height: 425px;
+      width: 100%;
+      flex: 0 1 auto;
+      max-width: 100%;
+      border: {
+        right: 0;
+        bottom-color: rgba(white, .25);
+      }
+    }
+
+    &--world {
+      background-image: url("../images/world_bg.png");
+    }
+
+    &--employees {
+      background-image: url("../images/employees_bg.png");
+    }
+
+    &--ideas {
+      background-image: url("../images/ideas_bg.png");
+    }
+
+    &:last-of-type {
+      border-right: 0;
+    }
+
+    &__layout {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 170px;
+      text-align: center;
+    }
+
+    &__counter {
+      font: 72px $fontMont;
+      color: white;
+      margin-bottom: 22px;
+      white-space: nowrap;
+      line-height: 1;
+
+      @include breakpoint($xs){
+        font-size: 60px;
+      }
+    }
+
+    &__text {
+      font: 30px $fontMont;
+      color: rgba(white, .5);
+      line-height: 1;
+    }
+  }
+}
+
+.about {
+  background: $pink;
+  position: relative;
+  margin-top: 105px;
+  box-sizing: border-box;
+  padding-bottom: 83px;
+
+  @include breakpoint($sm){
+    margin-top: 40px;
+  }
+
+  @include breakpoint($xs){
+    padding-bottom: 20px;
+  }
+  
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background: url("../images/about_bg.png") center center no-repeat;
+    background-size: 100% 100%;
+    height: 90px;
+    top: -90px;
+    left: 0;
+    right: 0;
+  }
+  
+  &__layout {
+    text-align: center;
+  }
+
+  &__list {
+    display: flex;
+    margin-top: 50px;
+
+    @include breakpoint($xs){
+      flex-direction: column;
+    }
+  }
+
+  &__item {
+    flex: 0 1 33%;
+
+    @include breakpoint($xs){
+      margin-bottom: 40px;
+    }
+
+    &__image-container {
+      width: 118px;
+      height: 118px;
+      overflow: hidden;
+      border-radius: 60px;
+      margin: 0 auto 35px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__title {
+      margin-bottom: 30px;
+      font: 18px $fontMont;
+    }
+
+    &__text {
+      font-size: 15px;
+    }
+  }
+}
+
+.improvement {
+  height: 535px;
+  background: url("../images/improvement_bg.jpg") center center no-repeat;
+  background-size: cover;
+
+  &__layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 320px;
+    margin: auto;
+    text-align: center;
+    box-sizing: border-box;
+
+    @include breakpoint($xs){
+      padding: 0 5px;
+    }
+
+    h2 {
+      color: white;
+      margin-bottom: 40px;
+    }
+  }
+}
+
+.footer {
+  &__layout {
+    display: flex;
+    justify-content: space-between;
+
+    @include breakpoint($xs){
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__contact {
+    box-sizing: border-box;
+    padding: 65px 0 55px;
+    margin-bottom: 26px;
+    position: relative;
+
+    @include breakpoint($xs){
+      padding-bottom: 15px;
+    }
+
+    &::after {
+      content: "";
+      background: url("../images/footer_contact_bg.png") repeat-x;
+      height: 26px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -26px;
+    }
+
+    &__item {
+      flex: 0 1 33%;
+      font: 18px $fontMont;
+
+      @include breakpoint($xs){
+        flex: 0 1 auto;
+        margin-bottom: 40px;
+      }
+
+      &__email {
+        text-decoration: none;
+        color: $black;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &__socials {
+    &__list {
+      display: flex;
+    }
+
+    &__item {
+      width: 30px;
+      margin-right: 15px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    &__link {
+      color: $black;
+      display: block;
+      font-size: 24px;
+      transition: color .2s;
+
+      &:hover {
+        color: $red;
+      }
+    }
+  }
+
+  &__content {
+    box-sizing: border-box;
+    padding: 27px 0 17px;
+  }
+
+  &__logo {
+    @include breakpoint($xs){
+      margin-bottom: 30px;
+    }
+  }
+
+  &__copyright {
+    display: flex;
+    align-items: center;
+    font-family: $fontMont;
+
+    @include breakpoint($xs){
+      margin-bottom: 30px;
+    }
+  }
+
+  &__scroll {
+    width: 68px;
+    height: 68px;
+
+    &__button {
+      box-sizing: border-box;
+      display: block;
+      height: 100%;
+      border-radius: 50px;
+      border: 2px solid $black;
+      background: url("../images/scroll-up_bg.png") left 49% center no-repeat;
+    }
+  }
+}
